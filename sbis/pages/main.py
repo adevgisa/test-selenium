@@ -1,4 +1,6 @@
-from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import (StaleElementReferenceException,
+    TimeoutException, UnexpectedAlertPresentException)
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC 
@@ -18,13 +20,12 @@ class SbisMainPage(BasePage):
         ),
     }
 
+    @BasePage.page_action
     def go_to_contacts(self):
-        WebDriverWait(self.driver, 10,
-            ignored_exceptions = (StaleElementReferenceException,)
-        ).until(EC.element_to_be_clickable(self.link_header_contacts))
-
-        #self.link_header_contacts.element_to_be_clickable()
+        self.link_header_contacts.element_to_be_clickable()
         self.link_header_contacts.hover()
         self.link_header_contacts.click_button()
+
+        self.wait.until(EC.url_to_be(SbisContactsPage.page_url))
 
         return SbisContactsPage(self.driver)
