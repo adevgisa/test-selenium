@@ -4,7 +4,7 @@ import time
 
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support import expected_conditions as EC
  
 from seleniumpagefactory import PageFactory
 
@@ -40,9 +40,11 @@ class BasePage(PageFactory):
         return wrapped_page_action
  
     def __init__(self, driver):
-
         self.driver = driver
+        self.driver.set_page_load_timeout(5)
+
         self.wait = WebDriverWait(self.driver, 10)
+
         self.action = ActionChains(self.driver)
 
         self.logger = BasePage.get_logger()
@@ -71,9 +73,8 @@ class BasePage(PageFactory):
             "%(asctime)s: %(levelname)s: %(name)s: %(message)s"
         )
         handler.setFormatter(formatter)
-        cls.logger.addHandler(handler)
 
-        cls.logger.propagate = False
+        cls.logger.addHandler(handler)
 
         return cls.logger
 

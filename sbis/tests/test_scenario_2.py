@@ -12,8 +12,6 @@ from sbis.pages.main import SbisMainPage
  
 @pytest.mark.parametrize('rgn_name, rgn_url', [("Камчат", "kamchatskij")])
 def test_scenario_2(driver, rgn_name, rgn_url):
-#    driver.get(SbisMainPage.page_url)
-
     sbis_main = SbisMainPage(driver).navigate()
     sbis_contacts = sbis_main.go_to_contacts()
     
@@ -23,7 +21,9 @@ def test_scenario_2(driver, rgn_name, rgn_url):
 
     assert sbis_contacts.block_partners_list.is_displayed()
 
-    sbis_contacts.logger.info('Choosing reginon to ' + rgn_name + ' with url ' + rgn_url)
+    sbis_contacts.logger.info(
+        f"Changing region to '{rgn_name}' with url '{rgn_url}'"
+    )
     sbis_contacts.choose_region(rgn_name)
 
     assert rgn_name in sbis_contacts.get_region_chooser_text()
