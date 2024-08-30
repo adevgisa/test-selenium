@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC 
 
-from generic.base_page import BasePage
+from common.base_page import BasePage
 
 from tensor.pages.main import TensorMainPage
  
@@ -44,7 +44,6 @@ class SbisContactsPage(BasePage):
 
         return TensorMainPage(self.driver)
 
-    @BasePage.page_action
     def get_region_chooser_text(self):
         self.link_region_chooser.visibility_of_element_located()
 
@@ -73,7 +72,6 @@ class SbisContactsPage(BasePage):
         self.wait.until(EC.url_changes(cur_url))
 
 
-    @BasePage.page_action
     def get_city_from_partners_list(self):
         self.block_partners_list.visibility_of_element_located()
 

@@ -1,9 +1,6 @@
 import time
-
 import pytest
  
-from tensor.pages.about import TensorAboutPage
-
 from sbis.pages.main import SbisMainPage
  
  

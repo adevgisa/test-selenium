@@ -10,18 +10,11 @@ logs_path = "./logs"
 if not os.path.exists(logs_path):
     os.mkdir(logs_path)
 
-tmp_path = "/home/user/tmp"
-
-if not os.path.exists(tmp_path):
-    os.mkdir(tmp_path)
-
-os.environ["TMPDIR"] = tmp_path
-
-
 @pytest.fixture(scope='session')
 def driver(request):
     """Set up webdriver fixture."""
-    options = Options()
+    options = webdriver.FirefoxOptions()
+    options.binary_location = "/home/user/.opt/firefox/firefox"
     #options.add_argument('--no-sandbox')
     #options.add_argument('--disable-dev-shm-usage')
 
@@ -33,8 +26,7 @@ def driver(request):
     driver.maximize_window()
     driver.implicitly_wait(8)
 
-    #driver.get("https:\\sbis.ru")
-
     yield driver
+
     driver.quit()
 

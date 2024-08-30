@@ -179,3 +179,9 @@ Sessionx.vim
 tags
 # Persistent undo
 [._]*.un~
+
+# Html reports
+*.html
+
+#
+assets/

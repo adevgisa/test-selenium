@@ -2,9 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC 
 
-#from sbis.pages.main import SbisMainPage
-
-from generic.base_page import BasePage
+from common.base_page import BasePage
 
 from tensor.pages.about import TensorAboutPage
  
@@ -24,10 +22,10 @@ class TensorMainPage(BasePage):
 
     @BasePage.page_action
     def go_to_about(self):
-        cookie_agrmt_close = (
-            By.CSS_SELECTOR,
-            'div.tensor_ru-CookieAgreement__close'
-        )
+        #cookie_agrmt_close = (
+        #    By.CSS_SELECTOR,
+        #    'div.tensor_ru-CookieAgreement__close'
+        #)
 
         #self.wait.until(EC.element_to_be_clickable(cookie_agrmt_close)).click()
 

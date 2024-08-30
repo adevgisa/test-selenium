@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC 
 from selenium.webdriver.support.wait import WebDriverWait
 
-from generic.base_page import BasePage
+from common.base_page import BasePage
  
  
 class TensorAboutPage(BasePage):
@@ -16,7 +16,6 @@ class TensorAboutPage(BasePage):
         ),
     }
 
-    @BasePage.page_action
     def get_images_in_block_working(self):
         self.block_working.visibility_of_element_located()
 

@@ -1,12 +1,8 @@
-import functools
 import time
-
 import pytest
 
 from utils.location import get_region_name_by_ip
  
-from tensor.pages.about import TensorAboutPage
-
 from sbis.pages.main import SbisMainPage
  
  
