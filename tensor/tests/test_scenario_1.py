@@ -1,4 +1,3 @@
-import time
 import pytest
  
 from sbis.pages.main import SbisMainPage

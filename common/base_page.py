@@ -2,17 +2,19 @@ import functools
 import logging
 import time
 
+from pathlib import Path
+
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
  
 from seleniumpagefactory import PageFactory
 
+from common import config
+
 class BasePage(PageFactory):
     page_url = ""
-    logger = None
-    logs_path='./logs/'
-    log_file='/page-actions.log'
+    _logger = None
 
     def page_action(action, max_attempts = 10, attempts_pause=1):
         @functools.wraps(action)
@@ -61,22 +63,22 @@ class BasePage(PageFactory):
 
     @classmethod
     def get_logger(cls):
-        if cls.logger is not None:
-            return cls.logger
+        if cls._logger is not None:
+            return cls._logger
 
-        cls.logger = logging.getLogger('selenium')
-        cls.logger.propagate = False
-        cls.logger.setLevel(logging.INFO)
+        cls._logger = logging.getLogger('selenium')
+        cls._logger.propagate = False
+        cls._logger.setLevel(logging.INFO)
 
-        handler = logging.FileHandler(cls.logs_path + cls.log_file)
+        handler = logging.FileHandler(Path(config.logs_path, config.log_file))
         formatter = logging.Formatter(
             "%(asctime)s: %(levelname)s: %(name)s: %(message)s"
         )
         handler.setFormatter(formatter)
 
-        cls.logger.addHandler(handler)
+        cls._logger.addHandler(handler)
 
-        return cls.logger
+        return cls._logger
 
     def log_action(self, message):
         self.logger.info(self.__class__.__name__ + ': ' + message)
